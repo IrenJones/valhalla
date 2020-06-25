@@ -5,7 +5,7 @@ import com.valhallaproject.blog.dto.PostFullDto;
 
 import java.util.List;
 
-public interface BlogService {
+public interface PostService {
 
 	PostFullDto addPost(PostShortDto dto);
 

@@ -2,7 +2,7 @@ package com.valhallaproject.blog.controller;
 
 import com.valhallaproject.blog.dto.PostFullDto;
 import com.valhallaproject.blog.dto.PostShortDto;
-import com.valhallaproject.blog.service.BlogService;
+import com.valhallaproject.blog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
@@ -26,27 +26,27 @@ import java.util.List;
 public class PostController {
 
 	@Autowired
-	private BlogService blogService;
+	private PostService postService;
 
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PostFullDto>> getAllPosts(){
-		return new ResponseEntity<>(blogService.getAllPosts(), HttpStatus.OK);
+		return new ResponseEntity<>(postService.getAllPosts(), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PostFullDto> addPost(@Valid @RequestBody PostShortDto dto){
-		return new ResponseEntity<>(blogService.addPost(dto), HttpStatus.CREATED);
+		return new ResponseEntity<>(postService.addPost(dto), HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/edit/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PostFullDto> editPost(@Valid @RequestBody PostShortDto dto,
 												@PathVariable(value = "id") Long id){
-		return new ResponseEntity<>(blogService.updatePost(id, dto), HttpStatus.OK);
+		return new ResponseEntity<>(postService.updatePost(id, dto), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PostFullDto> deletePost(@PathVariable(value = "id") Long id){
-		blogService.deletePost(id);
+		postService.deletePost(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

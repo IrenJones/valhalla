@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
